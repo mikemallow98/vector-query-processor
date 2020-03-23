@@ -12,7 +12,9 @@ QueryHandler::QueryHandler(std::string query_in, Terms terms_in){
     query.original_query = query_in;
     terms = terms_in;
 }
-
+/**
+ * uses the same tokenization method as last project.
+ */ 
 void QueryHandler::tokenize(){
     query.terms = removeSpaces(query.original_query);
     vector<string> tokenized;
@@ -33,12 +35,18 @@ std::vector<std::string> QueryHandler::removeSpaces(std::string line){
     return retval;
 }
 
+/**
+ * prints each term in the query
+ */ 
 void QueryHandler::print_terms(){
     for(auto i = query.terms.begin(); i != query.terms.end(); ++i){
         cout << *i << endl;
     }
 }
 
+/**
+ * Getter for the terms in the query
+ */ 
 std::vector<std::string> QueryHandler::get_terms(){
     return query.terms;
 }
@@ -55,12 +63,15 @@ void QueryHandler::process_query(){
     DictionaryEntry dic_ent;
     for(int i = 0; i < number_of_terms; ++i){
         dic_ent = terms.get_dictionary_entry(query.terms.at(i));
-        cout << dic_ent.term << "\t";
         for(int k = 0; k < dic_ent.document_freq; ++k){
             term_posting_list[i].push(terms.get_postings_entry(dic_ent.offset + k));
-            cout << terms.get_postings_entry(dic_ent.offset + k).document_id << terms.get_postings_entry(dic_ent.offset + k).term_freq<< "\t";
         }
-        cout << endl;
     }
+    /**
+     * 
+     * TODO: Implement document at a time algorithm here. The Postings lists are saved
+     * in the term_posting_list array as a series of queues (should be the easiest way
+     * since DaaT uses a k way merge). 
+     */
     
 }

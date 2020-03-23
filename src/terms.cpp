@@ -10,7 +10,9 @@ void Terms::populate_data(string dictionary_filename, string postings_filename){
     update_dictionary(dictionary_filename);
     update_postings(postings_filename);
 }
-
+/**
+ * Adds entries to the dictionary
+ */ 
 void Terms::update_dictionary(std::string filename){
     FileParser fp(filename);
     fp.open();
@@ -25,6 +27,10 @@ void Terms::update_dictionary(std::string filename){
         dictionary.insert({temp.term, temp});
     }
 }
+
+/**
+ * Updates the postings list
+ */ 
 void Terms::update_postings(std::string filename){
     FileParser fp(filename);
     fp.open();
@@ -39,23 +45,32 @@ void Terms::update_postings(std::string filename){
         postings.push_back(temp);
     }
 }
-
+/**
+ * Prints the specified dictionary entry
+ */ 
 void Terms::print_dictionary_entry(std::string term){
     auto ret = dictionary.find(term);
     cout << ret->first << " " << ret->second.document_freq << " " << ret->second.offset <<endl;
 }
 
+/**
+ * prints a single posting entry at the offset
+ */ 
 void Terms::print_postings_entry(int offset){
     Posting temp;
     temp = postings.at(offset);
     cout << temp.document_id << " " << temp.term_freq << " " << temp.weight <<endl;
 }
-
+/**
+ * returns a single dictionary entry corresponding to the term
+ */
 DictionaryEntry Terms::get_dictionary_entry(std::string term){
     auto itr = dictionary.find(term);
     return itr->second;
 }
-
+/**
+ * Returns a single Posting entry at location offset
+ */ 
 Posting Terms::get_postings_entry(int offset){
     return postings.at(offset);
 }
