@@ -35,6 +35,7 @@ void Terms::update_postings(std::string filename){
         Posting temp;
         par >> temp.document_id;
         par >> temp.term_freq;
+        temp.weight = 0.0;
         postings.push_back(temp);
     }
 }
@@ -47,7 +48,7 @@ void Terms::print_dictionary_entry(std::string term){
 void Terms::print_postings_entry(int offset){
     Posting temp;
     temp = postings.at(offset);
-    cout << temp.document_id << " " << temp.term_freq << endl;
+    cout << temp.document_id << " " << temp.term_freq << " " << temp.weight <<endl;
 }
 
 DictionaryEntry Terms::get_dictionary_entry(std::string term){
