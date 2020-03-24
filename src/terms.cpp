@@ -24,6 +24,7 @@ void Terms::update_dictionary(std::string filename){
         par >> temp.term;
         par >> temp.document_freq;
         par >> temp.offset;
+        temp.weight_idf = 0.0;
         dictionary.insert({temp.term, temp});
     }
 }
@@ -41,7 +42,7 @@ void Terms::update_postings(std::string filename){
         Posting temp;
         par >> temp.document_id;
         par >> temp.term_freq;
-        temp.weight = 0.0;
+        temp.weight_tf = 0.0;
         postings.push_back(temp);
     }
 }
@@ -59,7 +60,7 @@ void Terms::print_dictionary_entry(std::string term){
 void Terms::print_postings_entry(int offset){
     Posting temp;
     temp = postings.at(offset);
-    cout << temp.document_id << " " << temp.term_freq << " " << temp.weight <<endl;
+    cout << temp.document_id << " " << temp.term_freq << " " << temp.weight_tf <<endl;
 }
 /**
  * returns a single dictionary entry corresponding to the term
@@ -81,6 +82,20 @@ Posting Terms::get_postings_entry(int offset){
  */ 
 void Terms::calculate_term_weight(){
     for(auto post = postings.begin(); post != postings.end(); ++post){
-        post->weight = 1 + log10(post->term_freq);
+        post->weight_tf = 1 + log10(post->term_freq);
     }
 }
+
+void Terms::calculate_idf_weight(){
+    for(auto post = postings.begin(); post != postings.end(); ++post){
+        post->weight_idf = log10( 200 / (post->document_freq));
+    }
+}
+
+void Terms::calculate_overall_weight(){
+    weight=0.0;
+    for(auto post = postings.begin(); post != postings.end(); ++post){
+        post->weight = calculate_term_weight() * calculate_idf_weight();
+    }
+}
+

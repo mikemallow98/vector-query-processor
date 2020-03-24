@@ -73,5 +73,4 @@ void QueryHandler::process_query(){
      * in the term_posting_list array as a series of queues (should be the easiest way
      * since DaaT uses a k way merge). 
      */
-    
 }
