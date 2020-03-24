@@ -88,14 +88,22 @@ void Terms::calculate_term_weight(){
 
 void Terms::calculate_idf_weight(){
     for(auto post = postings.begin(); post != postings.end(); ++post){
-        post->weight_idf = log10( 200 / (post->document_freq));
+        //this needs to be changed to be calculated on a document entry, not a posting list
+        //post->weight_idf = log10( 200 / (post->document_freq));
     }
 }
 
-void Terms::calculate_overall_weight(){
-    weight=0.0;
+/**
+ * This method should be called after the idf weight has already been calculated for each term
+ * @param idf_weight    the idf weight of the term.
+ */ 
+void Terms::calculate_overall_weight(double idf_weight){
+    //My modification-
+    calculate_idf_weight();
+    calculate_term_weight();
+    // weight=0.0;   not needed
     for(auto post = postings.begin(); post != postings.end(); ++post){
-        post->weight = calculate_term_weight() * calculate_idf_weight();
+        post->weight = post->weight_tf * idf_weight;
     }
 }
 

@@ -30,7 +30,7 @@ class Terms{
         DictionaryEntry get_dictionary_entry(std::string term);
         Posting get_postings_entry(int offset);
         void calculate_term_weight();
-        void calculate_overall_weight();
+        void calculate_overall_weight(double idf_weight);
         void calculate_idf_weight();
 
     private:
