@@ -73,4 +73,12 @@ void QueryHandler::process_query(){
      * in the term_posting_list array as a series of queues (should be the easiest way
      * since DaaT uses a k way merge). 
      */
+
+    /**
+     * note that comparing the similarity has to be done with the k way merge of the 
+     * documents. So peek each queue, the lowest document id(s) will be considered. Pop the
+     * values and calculate that documents overall similarity using the cosine similarity
+     *  formula (will need a separate data structure to contain the scores of each
+     *  document probably).
+     */ 
 }
