@@ -5,6 +5,7 @@
 #include <iostream>
 #include <queue>
 #include "stemmer.h"
+#include "terms.hpp"
 
 using namespace std;
 
