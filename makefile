@@ -1,4 +1,4 @@
-TARGET_EXEC ?= dictionary
+TARGET_EXEC ?= query
 
 SRC_DIRS ?= ./src
 BUILD_DIR ?= ./BUILD
