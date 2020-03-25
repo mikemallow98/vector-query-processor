@@ -90,4 +90,12 @@ void QueryHandler::process_query(){
     * pop all of them and calculate the cosine similarity. 
     * After that, compare the weights to find the ordering
     */
+
+    for(int i = 0; i < number_of_terms; ++i){
+        for(int k = 0; k < dic_ent.document_freq; ++k){
+            
+        }
+    }
+
+
 }
