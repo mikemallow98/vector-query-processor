@@ -4,8 +4,9 @@
 #include<cstring>
 #include <iostream>
 #include <queue>
+#include <cmath>
+#include <algorithm>
 #include "stemmer.h"
-#include "terms.hpp"
 
 using namespace std;
 
@@ -72,7 +73,7 @@ void QueryHandler::process_query(){
     }
     /**
      * 
-     * TODO: Implement document at a time algorithm here. The Postings lists are saved
+     *  Implement document at a time algorithm here. The Postings lists are saved
      * in the term_posting_list array as a series of queues (should be the easiest way
      * since DaaT uses a k way merge). 
      */
@@ -90,4 +91,76 @@ void QueryHandler::process_query(){
     * pop all of them and calculate the cosine similarity. 
     * After that, compare the weights to find the ordering
     */
+
+   bool is_empty = false; 
+  
+   Posting temp;
+   vector<double> posting_weight;
+   vector<double> query_weight;
+   while(!is_empty){
+        int min = 2000;
+       //get the next smallest document
+       for(int i =0; i < number_of_terms; ++i){
+           temp = term_posting_list[i].front();
+           if(temp.document_id < min){
+               min = temp.document_id;
+           }
+       }
+       for(int i = 0; i < number_of_terms; ++i){
+           temp = term_posting_list[i].front();
+           if(temp.document_id == min){
+               term_posting_list[i].pop();
+               double idf_weight = 1 + log10(200 / terms.get_dictionary_entry(query.terms.at(i)).document_freq);
+               temp.weight_tf = temp.weight_tf / terms.documents[temp.document_id].number_of_terms;
+               //cout << "posting weight is: " << temp.weight_tf * idf_weight << " idf is: " << idf_weight << " tf is: " << temp.weight_tf <<endl;
+                posting_weight.push_back(temp.weight_tf * idf_weight);
+                double q_weight = 1 + log10(1); //tf for query
+                q_weight = q_weight *  (200 / terms.get_dictionary_entry(query.terms.at(i)).document_freq);         //idf
+                //cout << "qeight is " << q_weight << endl;
+                query_weight.push_back(q_weight);
+                //get the cosine similarity now
+                terms.documents[temp.document_id].cosine_similarity = calculate_cosine_similarity(posting_weight, query_weight);
+           }
+       }
+       //now check if all queues are empty
+       for(int i = 0; i < number_of_terms; ++i){
+           is_empty = true;
+           if(!term_posting_list[i].empty()){
+               is_empty = false;
+           }
+       }
+       //is_empty = true;
+   }
 }
+
+double QueryHandler::calculate_cosine_similarity(vector<double> p_weights, vector<double> q_weights){
+    double numerator = 0;
+    double denominator = 0;
+    for(int i = 0; i < p_weights.size(); ++i){
+        numerator = numerator +  (p_weights.at(i) * q_weights.at(i));
+        denominator = denominator + (pow(p_weights.at(i), 2.0));
+    }
+    denominator = sqrt(denominator);
+    //cout << "The cosine similarity is: " << numerator/denominator << endl;
+    return numerator / denominator;
+}
+
+void QueryHandler::print_results(){
+
+    for(int i = 0; i < 200; ++i){
+        if(terms.documents[i].cosine_similarity > 0){
+            cout << "document: " << i+1 << "with a similarity of: " << terms.documents[i].cosine_similarity << endl;
+        }
+    }
+}
+
+/**
+ * TODO: add a method which will find the top 10 results and write them to a file
+ * The cosine similarities are all saved in the array: terms.documents[].cosine_similarity
+ * The document id is the index of the array + 1. So, Document1 is stored in index 0. to
+ * access the cosine similarity of document 1, use terms.documents[0].cosine_similarity
+ * If a cosine similarity = 0, then that means there are no terms in common and that 
+ * document can be ignored.
+ * 
+ */ 
+

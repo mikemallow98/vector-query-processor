@@ -26,8 +26,9 @@ int main(){
     string query2 = "stock rally";
     string query3 = "debt crisis";
     string query4 = "stock future higher";
-    QueryHandler q1(query4, t1);
+    QueryHandler q1(query2, t1);
     q1.tokenize();
     //q1.print_terms();
     q1.process_query();
+    q1.print_results();
 }
