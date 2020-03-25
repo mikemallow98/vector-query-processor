@@ -177,6 +177,7 @@ void QueryHandler::print_results(string filename){
             outFile << terms.documents[i].document_id << ", " << terms.documents[i].cosine_similarity << endl;
         }
     }
+    outFile.close();
   /**
   int similarity[]={};
   Document output[10];

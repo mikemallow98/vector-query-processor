@@ -74,5 +74,6 @@ int main(){
     q4.tokenize();
     q4.process_query();
     q4.print_results(output4);
+    t1.print_postings();
     
 }

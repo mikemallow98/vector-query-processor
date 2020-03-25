@@ -3,6 +3,7 @@
 
 #include <bits/stdc++.h> 
 #include <cmath>
+#include <fstream>
 
 using namespace std;
 
@@ -115,3 +116,11 @@ void Terms::calculate_docment_size(){
     }
 }
 
+void Terms::print_postings(){
+    ofstream outFile;
+    outFile.open("revised_postings.txt");
+    for(auto i = postings.begin(); i != postings.end(); ++i){
+        outFile << i->document_id << " " << i->weight_tf << endl;
+    }
+    outFile.close();
+}

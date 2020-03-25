@@ -39,6 +39,7 @@ class Terms{
         void calculate_overall_weight(double idf_weight);
         void calculate_idf_weight();
         Document documents[201];
+        void print_postings();
 
     private:
         std::unordered_map<std::string, DictionaryEntry> dictionary;
