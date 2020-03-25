@@ -22,6 +22,11 @@ struct Posting{
     double weight_tf;
 };
 
+struct Document{
+    int number_of_terms;
+    double cosine_similarity = 0.0;
+};
+
 class Terms{
     public: 
         void populate_data(std::string dictionary_filename, std::string postings_filename);
@@ -32,12 +37,15 @@ class Terms{
         void calculate_term_weight();
         void calculate_overall_weight(double idf_weight);
         void calculate_idf_weight();
+        Document documents[201];
 
     private:
         std::unordered_map<std::string, DictionaryEntry> dictionary;
         std::vector<Posting> postings;
+        
         void update_dictionary(std::string filename);
         void update_postings(std::string filename);
+        void calculate_docment_size();
 
 
 };

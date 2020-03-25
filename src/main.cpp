@@ -39,9 +39,18 @@ int main(){
     t1.calculate_term_weight();
     //t1.print_postings_entry(1395);
     //the queries are hard coded in as well for now...
+
     
     QueryHandler q1(chosen_query, t1);
+
+    string query1 = "europe";
+    string query2 = "stock rally";
+    string query3 = "debt crisis";
+    string query4 = "stock future higher";
+    QueryHandler q1(query2, t1);
+
     q1.tokenize();
     //q1.print_terms();
     q1.process_query();
+    q1.print_results();
 }

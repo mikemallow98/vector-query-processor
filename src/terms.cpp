@@ -45,6 +45,7 @@ void Terms::update_postings(std::string filename){
         temp.weight_tf = 0.0;
         postings.push_back(temp);
     }
+    calculate_docment_size();
 }
 /**
  * Prints the specified dictionary entry
@@ -87,8 +88,9 @@ void Terms::calculate_term_weight(){
 }
 
 void Terms::calculate_idf_weight(){
-    for(auto dict = dictionary.begin(); dict != dictionary.end(); ++dict){
-        dict->weight_idf = log10( 200 / (dict->document_freq));
+    for(auto post = postings.begin(); post != postings.end(); ++post){
+        //this needs to be changed to be calculated on a document entry, not a posting list
+        //post->weight_idf = log10( 200 / (post->document_freq));
     }
 }
 
@@ -98,11 +100,17 @@ void Terms::calculate_idf_weight(){
  */ 
 void Terms::calculate_overall_weight(double idf_weight){
     //My modification-
-    calculate_idf_weight();
-    calculate_term_weight();
+    //calculate_idf_weight();
+   // calculate_term_weight();
     // weight=0.0;   not needed
-    for(auto post = postings.begin(); post != postings.end(); ++post){
-        post->weight = post->weight_tf * idf_weight;
+    //for(auto post = postings.begin(); post != postings.end(); ++post){
+        //post->weight = post->weight_tf * idf_weight;
+    //}
+}
+
+void Terms::calculate_docment_size(){
+    for(auto i = postings.begin(); i != postings.end(); ++i){
+        documents[i->document_id].number_of_terms = documents[i->document_id].number_of_terms + i->term_freq;
     }
 }
 
