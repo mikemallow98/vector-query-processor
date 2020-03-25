@@ -22,6 +22,7 @@ class QueryHandler{
         Query query;
         Terms terms;
         std::vector<std::string> removeSpaces(std::string line);
+        const int NUMBER_OF_DOCUMENTS = 200;
 };
 
 

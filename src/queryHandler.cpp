@@ -8,6 +8,8 @@
 
 using namespace std;
 
+
+
 QueryHandler::QueryHandler(std::string query_in, Terms terms_in){
     query.original_query = query_in;
     terms = terms_in;
@@ -81,4 +83,6 @@ void QueryHandler::process_query(){
      *  formula (will need a separate data structure to contain the scores of each
      *  document probably).
      */ 
+
+    //for each query term
 }
