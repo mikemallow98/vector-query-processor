@@ -160,7 +160,7 @@ void QueryHandler::print_results(string filename){
   outFile.open(filename);
 
   int similarity[]={};
-  string output[10];
+  Document output[10];
   int j=0;
     for(int i = 0; i < 200; ++i){
         if(terms.documents[i].cosine_similarity > 0){
@@ -180,21 +180,22 @@ void QueryHandler::print_results(string filename){
       }
     }
 
+
+    //The Documents array output[] needs to be converted into a string array
+    //to be written into a binary file
+
+
+
     for(int i=0;i<10;i++){
-      outFile << output[i] << endl;
+      outFile.write((char*)&(output[i]),sizeof(Document));
+
     }
     
 }
 
-/**
- * TODO: add a method which will find the top 10 results and write them to a file
- * The cosine similarities are all saved in the array: terms.documents[].cosine_similarity
- * The document id is the index of the array + 1. So, Document1 is stored in index 0. to
- * access the cosine similarity of document 1, use terms.documents[0].cosine_similarity
- * If a cosine similarity = 0, then that means there are no terms in common and that 
- * document can be ignored.
- * 
- */ 
+
+
+
 
 
 

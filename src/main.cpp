@@ -47,12 +47,16 @@ int main(){
     string query2 = "stock rally";
     string query3 = "debt crisis";
     string query4 = "stock future higher";
-    QueryHandler q1(query2, t1);
+    
+    QueryHandler q1(query1, t1);
+    QueryHandler q2(query2, t1);
+    QueryHandler q3(query3, t1);
+    QueryHandler q4(query4, t1);
 
-    string output1 = "query1result.txt"
-    string output2 = "query2result.txt"
-    string output3 = "query3result.txt"
-    string output4 = "query4result.txt"
+    string output1 = "query1result.txt";
+    string output2 = "query2result.txt";
+    string output3 = "query3result.txt";
+    string output4 = "query4result.txt";
 
     q1.tokenize();
     q1.process_query();
