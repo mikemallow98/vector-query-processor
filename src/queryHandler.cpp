@@ -158,7 +158,26 @@ double QueryHandler::calculate_cosine_similarity(vector<double> p_weights, vecto
 void QueryHandler::print_results(string filename){
 
   outFile.open(filename);
+    for(int i = 0; i < 200; ++i){
+        if(terms.documents[i].cosine_similarity > 0){
+            cout << "document: " << i+1 << " " << terms.documents[i].document_id << " with a similarity of: " << terms.documents[i].cosine_similarity << endl;
+        }
+    }
 
+    sort(begin(terms.documents), end(terms.documents), [](Document a, Document b) {return a.cosine_similarity > b.cosine_similarity;});
+
+    for(int i = 0; i < 200; ++i){
+        if(terms.documents[i].cosine_similarity > 0){
+            cout << "document: " << i+1 << " " << terms.documents[i].document_id << " with a similarity of: " << terms.documents[i].cosine_similarity << endl;
+        }
+    }
+
+    for(int i = 0; i < 10; ++i){
+        if(terms.documents[i].cosine_similarity > 0){
+            outFile << terms.documents[i].document_id << ", " << terms.documents[i].cosine_similarity << endl;
+        }
+    }
+  /**
   int similarity[]={};
   Document output[10];
   int j=0;
@@ -190,6 +209,7 @@ void QueryHandler::print_results(string filename){
       outFile.write((char*)&(output[i]),sizeof(Document));
 
     }
+    */
     
 }
 

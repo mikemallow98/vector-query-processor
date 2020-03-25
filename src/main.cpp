@@ -48,9 +48,9 @@ int main(){
     string query3 = "debt crisis";
     string query4 = "stock future higher";
     
-    QueryHandler q1(query1, t1);
-    QueryHandler q2(query2, t1);
-    QueryHandler q3(query3, t1);
+    //QueryHandler q1(query1, t1);
+    //QueryHandler q2(query2, t1);
+    //QueryHandler q3(query3, t1);
     QueryHandler q4(query4, t1);
 
     string output1 = "query1result.txt";
@@ -58,19 +58,21 @@ int main(){
     string output3 = "query3result.txt";
     string output4 = "query4result.txt";
 
-    q1.tokenize();
-    q1.process_query();
-    q1.print_results(output1);
+    //q1.tokenize();
+    //q1.process_query();
+    //q1.print_results(output1);
 
-    q2.tokenize();
-    q2.process_query();
-    q2.print_results(output2);
+    
+    //q2.tokenize();
+    //q2.process_query();
+    //q2.print_results(output2);
 
-    q3.tokenize();
-    q3.process_query();
-    q3.print_results(output3);
+    //q3.tokenize();
+    //q3.process_query();
+    //q3.print_results(output3);
 
     q4.tokenize();
     q4.process_query();
     q4.print_results(output4);
+    
 }

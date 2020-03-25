@@ -111,6 +111,7 @@ void Terms::calculate_overall_weight(double idf_weight){
 void Terms::calculate_docment_size(){
     for(auto i = postings.begin(); i != postings.end(); ++i){
         documents[i->document_id].number_of_terms = documents[i->document_id].number_of_terms + i->term_freq;
+        documents[i->document_id].document_id = i->document_id + 1;
     }
 }
 

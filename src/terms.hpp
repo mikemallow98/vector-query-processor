@@ -25,6 +25,7 @@ struct Posting{
 struct Document{
     int number_of_terms;
     double cosine_similarity = 0.0;
+    int document_id;
 };
 
 class Terms{
