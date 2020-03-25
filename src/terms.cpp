@@ -87,9 +87,8 @@ void Terms::calculate_term_weight(){
 }
 
 void Terms::calculate_idf_weight(){
-    for(auto post = postings.begin(); post != postings.end(); ++post){
-        //this needs to be changed to be calculated on a document entry, not a posting list
-        //post->weight_idf = log10( 200 / (post->document_freq));
+    for(auto dict = dictionary.begin(); dict != dictionary.end(); ++dict){
+        dict->weight_idf = log10( 200 / (dict->document_freq));
     }
 }
 
