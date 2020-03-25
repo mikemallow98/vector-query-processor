@@ -84,5 +84,9 @@ void QueryHandler::process_query(){
      *  document probably).
      */ 
 
-    //for each query term
+    /*so, until all of the queues are empty, peek() each queue. Whichever queue has the 
+    * smallest documente_id, pop it and calculate the cosine similarity. If there is a tie
+    * pop all of them and calculate the cosine similarity. 
+    * After that, compare the weights to find the ordering
+    */
 }
