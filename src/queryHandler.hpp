@@ -4,6 +4,10 @@
 #include "terms.hpp"
 #include <string>
 #include <vector>
+#include <iostream>
+#include <fstream>
+
+using namespace std;
  
 
 
@@ -19,7 +23,8 @@ class QueryHandler{
         void print_terms();
         std::vector<std::string> get_terms();
         void process_query();
-        void print_results();
+        void print_results(string filename);
+        std::ofstream outFile;
     private:
         Query query;
         Terms terms;

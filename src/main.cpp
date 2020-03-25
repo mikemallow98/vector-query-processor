@@ -19,7 +19,7 @@ int main(){
     int x;
     string chosen_query;
 
-    string query1 = "europe";
+   /*string query1 = "europe";
     string query2 = "stock rally";
     string query3 = "debt crisis";
     string query4 = "stock future higher";
@@ -30,7 +30,7 @@ int main(){
     if (x==1) chosen_query=query1;
     else if (x==2) chosen_query=query2;
     else if (x==3) chosen_query=query3;
-    else if (x==4) chosen_query=query4;
+    else if (x==4) chosen_query=query4;*/
 
 
     t1.populate_data(dictionary_filename, postings_filename);
@@ -41,7 +41,7 @@ int main(){
     //the queries are hard coded in as well for now...
 
     
-    QueryHandler q1(chosen_query, t1);
+    //QueryHandler q1(chosen_query, t1);
 
     string query1 = "europe";
     string query2 = "stock rally";
@@ -49,8 +49,24 @@ int main(){
     string query4 = "stock future higher";
     QueryHandler q1(query2, t1);
 
+    string output1 = "query1result.txt"
+    string output2 = "query2result.txt"
+    string output3 = "query3result.txt"
+    string output4 = "query4result.txt"
+
     q1.tokenize();
-    //q1.print_terms();
     q1.process_query();
-    q1.print_results();
+    q1.print_results(output1);
+
+    q2.tokenize();
+    q2.process_query();
+    q2.print_results(output2);
+
+    q3.tokenize();
+    q3.process_query();
+    q3.print_results(output3);
+
+    q4.tokenize();
+    q4.process_query();
+    q4.print_results(output4);
 }

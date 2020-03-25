@@ -100,7 +100,7 @@ void QueryHandler::process_query(){
     }
 
 
-}
+
 
    bool is_empty = false; 
   
@@ -141,7 +141,7 @@ void QueryHandler::process_query(){
        }
        //is_empty = true;
    }
-
+}
 
 double QueryHandler::calculate_cosine_similarity(vector<double> p_weights, vector<double> q_weights){
     double numerator = 0;
@@ -155,13 +155,35 @@ double QueryHandler::calculate_cosine_similarity(vector<double> p_weights, vecto
     return numerator / denominator;
 }
 
-void QueryHandler::print_results(){
+void QueryHandler::print_results(string filename){
 
+  outFile.open(filename);
+
+  int similarity[]={};
+  string output[10];
+  int j=0;
     for(int i = 0; i < 200; ++i){
         if(terms.documents[i].cosine_similarity > 0){
-            cout << "document: " << i+1 << "with a similarity of: " << terms.documents[i].cosine_similarity << endl;
+           similarity[j] = terms.documents[i].cosine_similarity ;
+           j++;
         }
     }
+
+    int n = sizeof(similarity) / sizeof(similarity[0]); 
+    sort(similarity, similarity + n, greater<int>());
+
+    for(int i=0; i<10; i++){
+      for(int a=0; a<n ; a++){
+        if (terms.documents[a].cosine_similarity == similarity[i]){
+          output[i]=terms.documents[a];
+        }
+      }
+    }
+
+    for(int i=0;i<10;i++){
+      outFile << output[i] << endl;
+    }
+    
 }
 
 /**
@@ -173,5 +195,7 @@ void QueryHandler::print_results(){
  * document can be ignored.
  * 
  */ 
+
+
 
 
