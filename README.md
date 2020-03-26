@@ -11,6 +11,7 @@ assignment and our grades will be reduced by one level (e.g., from A to A- or fr
 B) for the first offense, and that we will receive a grade of “F” for the course for any
 additional offense of any kind."
 -Michael Mallow
+-Piril Okurogullari
 
 to compile: "make"
 
